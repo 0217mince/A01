@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ithcima.mapper.ComAdminMapper">
+
+	<resultMap type="com.ithcima.domain.ComAdmin" id="ComAdminResultMap">
+		<id property="id" column="com_admin_id" />
+		<result property="comId" column="com_id" />
+	</resultMap>
+
+	<resultMap type="com.ithcima.domain.Com" id="ComResultMap">
+		<id property="epId" column="com_id" />
+		<result property="epName" column="com_name" />
+		<result property="epAbb" column="com_name_short" />
+		<result property="epPhone" column="com_ph" />
+		<result property="epStyle" column="com_type" />
+		<result property="epIndustry" column="com_indus" />
+		<result property="epRegion" column="com_loc" />
+		<result property="epAddress" column="com_ad" />
+		<result property="postalCode" column="com_pcode" />
+		<result property="epFax" column="com_fax" />
+		<result property="epWeb" column="com_web" />
+		<result property="epTime" column="com_establish" />
+		<result property="epLogo" column="com_logo" />
+		<result property="auditStatus" column="com_audit_status" />
+		<result property="modStatus" column="com_mod_status" />
+		
+	</resultMap>
+
+
+	<resultMap type="com.ithcima.domain.SimpleCom" id="SimpleComResultMap">
+		<id property="epId" column="com_id" />
+		<result property="epName" column="com_name" />
+		<result property="auditStatus" column="com_audit_status" />
+		<result property="epStyle" column="com_type" />
+		<result property="epIndustry" column="com_indus" />
+		<result property="epRegion" column="com_loc" />
+	</resultMap>
+
+	<resultMap type="com.ithcima.domain.ComAudit" id="ComAuditResultMap">
+		<result property="epId" column="com_id" />
+		<result property="auditStatus" column="audit_status" />
+		<result property="auditReason" column="audit_reason" />
+		<result property="auditFile" column="audit_file" />
+		<result property="auditTime" column="audit_time" />
+	</resultMap>
+	
+	<resultMap type="com.ithcima.domain.ComMod" id="ComModResultMap">
+		<result property="epId" column="com_id" />
+		<result property="modStatus" column="mod_status" />
+		<result property="modReason" column="mod_reason" />
+		<result property="modTime" column="mod_time" />
+	</resultMap>
+	
+	<resultMap type="com.ithcima.domain.ComDepartment" id="ComDepartmentResultMap">
+        <result  property="comId"   column="com_id"/>
+        <result  property="dSuperior"  column="d_superior"/>
+        <result  property="dName"      column="d_name"/>
+        <result  property="dDescri"    column="d_descri"/>
+        <result  property="dRank"      column="d_rank"/>
+        <result  property="isDelete"   column="is_delete"/>  
+    </resultMap>
+
+	<resultMap type="com.ithcima.domain.Employee" id="EmployeeResultMap">
+         <result  property="emId"    column="em_id"/>
+         <result  property="comId"   column="com_id"/>
+         <result  property="emName"  column="em_name"/>
+         <result  property="emPh"    column="em_ph"/>
+         <result  property="emSex"   column="em_sex"/>
+         <result  property="emEm"    column="em_Em"/>
+         <result  property="emDep"   column="em_dep"/>
+         <result  property="emJob"   column="em_job"/>
+         <result  property="emLandline" column="em_landline"/>
+         <result  property="emExtension" column="em_extension"/>
+         <result  property="emNum"   column="em_Num"/>
+         <result  property="emNav"   column="em_nav"/>
+         <result  property="emGradSch"  column="em_grad_sch"/>
+         <result  property="emGradTime" column="em_grad_time"/>
+         <result  property="emDegree"   column="em_degree"/>
+         <result  property="emMaj"      column="em_maj"/>
+         <result  property="emNote"     column="em_note"/>
+         <result  property="emPartDep"  column="em_part_dep"/>
+         <result  property="emPartJob"  column="em_part_job"/>        
+     </resultMap>
+
+	<insert id="insertComAdmin" parameterType="ComAdmin">
+		INSERT INTO tb_com_admin_reg (com_admin_id,com_id) VALUES (#{id},#{comId})
+	</insert>
+
+	<insert id="insertComAdminInfo" parameterType="ComAdmin">
+		INSERT INTO tb_com_admin_info (com_admin_id) VALUES (#{id})
+	</insert>
+
+	<insert id="insertComInfo" parameterType="ComAdmin">
+		INSERT INTO tb_com_info (com_id) VALUES (#{comId})
+	</insert>
+
+	<select id="selectComAdmin" parameterType="String" resultMap="ComAdminResultMap">
+		select com_admin_id,com_id
+		from tb_com_admin_reg
+		where
+		com_admin_id=#{comAdminId}
+	</select>
+
+	<select id="selectComInfo" parameterType="String" resultMap="ComResultMap">
+		select com_id,com_logo,com_name,com_name_short,com_ph,
+			com_type,com_indus,com_loc,com_ad,com_pcode,com_fax,com_web,
+			com_establish,com_mod_status,com_audit_status
+		from tb_com_info
+		where com_id=#{value}
+	</select>
+
+	<update id="updateComInfo" parameterType="Com">
+		update tb_com_info
+		set com_logo = #{epLogo},
+		com_name = #{epName},
+		com_name_short = #{epAbb},
+		com_ph = #{epPhone},
+		com_type = #{epStyle},
+		com_indus = #{epIndustry},
+		com_loc = #{epRegion},
+		com_ad = #{epAddress},
+		com_pcode = #{postalCode},
+		com_fax = #{epFax},
+		com_web = #{epWeb},
+		com_establish = #{epTime}
+		where com_id = #{epId} and
+		com_mod_status = 1 and
+		com_audit_status &lt;&gt; 3
+	</update>
+
+	<select id="selectSimpleComs" resultMap="SimpleComResultMap">
+		SELECT com_id,
+		com_name,
+		com_type,
+		com_indus,
+		com_loc,
+		com_audit_status
+		FROM tb_com_info
+		WHERE 1=1
+		<if test="modStatus!= null"> and com_mod_status = #{modStatus}</if> 
+		<if test="auditStatus!= null"> and com_audit_status = #{auditStatus}</if>
+	</select>
+	
+	<select id="selectComs" resultMap="ComResultMap">
+		SELECT *
+		FROM tb_com_info
+		WHERE 1=1
+		<if test="modStatus!= null"> and com_mod_status = #{modStatus}</if> 
+		<if test="auditStatus!= null"> and com_audit_status = #{auditStatus}</if>
+	</select>
+
+	<update id="updateComInfoMod" parameterType="ComMod">
+		update tb_com_info
+		set com_mod_status = #{modStatus}
+		where com_id = #{epId}
+	</update>
+	
+	<insert id="insertComMod" parameterType="ComMod">
+		insert into tb_com_mod(com_id,mod_status,mod_reason,mod_time)
+		values(#{epId},#{modStatus},#{modReason},#{modTime})
+	</insert>
+	
+	<select id="selectComMods" resultMap="ComModResultMap">
+		select *
+		from tb_com_mod
+		where com_id = #{comId}
+		<if test="modStatus!= null"> and mod_status = #{modStatus}</if>
+	</select>
+	
+	<update id="updateComInfoAudit" parameterType="ComAudit">
+		update tb_com_info
+		set com_audit_status = #{auditStatus}
+		where com_id = #{epId}
+	</update>
+	
+	<insert id="insertComAudit" parameterType="ComAudit">
+		insert into tb_com_audit(com_id,audit_status,audit_reason,audit_time,audit_file)
+		values(#{epId},#{auditStatus},#{auditReason},#{auditTime},#{auditFile})
+	</insert>
+	
+	<select id="selectComAudits" parameterType="String" resultMap="ComAuditResultMap">
+		select *
+		from tb_com_audit
+		where com_id = #{value}
+	</select>
+
+	<!--&lt;&gt;为转义字符，代表<> -->
+	
+	
+	<select id="selectComDepartment" resultMap="ComDepartmentResultMap">
+         SELECT *
+         FROM tb_department
+         WHERE com_id = #{comId}
+        <if test="isDelete!=null"> and is_delete = #{isDelete}</if>  
+    </select>
+     
+    <update id="updateComDepartment" parameterType="ComDepartment">
+          update tb_department
+           set d_superior = #{dSuperior},
+               d_name = #{dName},
+               d_descri = #{dDescri},
+               d_rank = #{dRank},
+           where com_id=#{comId} and 
+                 d_name=#{dName} and is_delete = 0
+                 
+    </update>
+    
+    <insert id="insertComDepartment" parameterType="ComDepartment">
+         insert into tb_department(com_id,d_superior,d_name,d_descri,d_rank)
+         value(#{comId},#{dSuperior},#{dName},#{dDescri},#{dRank})
+    </insert>
+    
+    <update id="updateComDepartmentIsDelete">
+       update  tb_department 
+        set is_delete = #{isDelete}
+       where com_id=#{comId} and
+            d_name=#{dName}
+    </update>
+    
+    <select id="selectComEmployees" parameterType="Employee" resultMap="EmployeeResultMap">
+      select *
+      from tb_em_info
+      where 1=1
+      <if test="emId!=null">and em_id = #{emId}</if>
+      <if test="comId!=null">and com_id = #{comId}</if>
+      <if test="emDep!=null">and em_dep = #{emDep}</if>
+      <if test="emNum!=null">and em_num = #{emNum}</if>
+    </select>
+    
+    <update id="updateComEmployee" parameterType="Employee">
+     update tb_em_info
+       set com_id = #{comId},
+           em_name= #{emName},
+           em_sex = #{emSex},
+           em_em  = #{emEm},
+           em_dep = #{emDep},
+           em_job = #{emJob},
+      em_landline = #{emLandline},
+     em_extension = #{emExtension},
+           em_num = #{emNum},
+           em_nav = #{emNav},
+      em_grad_sch = #{emGradSch},
+     em_grad_time = #{emGradTime},
+        em_degree = #{emDegree},
+           em_maj = #{emMaj},
+          em_note = #{emNote},
+      em_part_dep = #{emPartDep},
+      em_part_job = #{emPartJob}
+     where  em_id = #{emId}
+    </update>
+    
+    <insert id="insertComEmployee" parameterType="Employee">
+   insert into  tb_em_info(em_id,com_id,em_name,em_ph,em_sex,em_em,em_dep,em_job,
+                em_landline,em_extension,em_num,em_nav,em_grad_sch,em_grad_time,em_degree,em_maj,em_note,
+                em_part_dep,em_part_job)
+         value(#{emId},#{comId},#{emName},#{emPh},#{emSex},#{emEm},#{emDep},#{emJob},#{emLandline},#{emExtension},#{emNum},#{emNav},
+               #{emGradSch},#{emGradTime},#{emDegree},#{emMaj},#{emNote},#{emPartDep},#{emPartJob})
+    </insert>
+    
+    <update id="updateComEmployeeIsDelete" parameterType="String">
+        update  tb_em_info
+           set com_id=null
+         where em_id=#{emId}
+    </update>
+
+	<insert id="insertEmployeeEvent"  parameterType="EmployeeEvent" >
+       insert into tb_em_event(em_id,com_id,type,reviewer,date,content,result,opinion)
+       value(#{emId},#{comId},#{type},#{reviewer},#{date},#{content},#{result},#{opinion})  
+    </insert>
+    
+    <update id="updateEmployeeEventDelete" parameterType="String">
+       update  tb_em_event
+          set  com_id=null
+       where  em_id = #{emId}  
+    </update>
+    
+    <select id="selectComEmployeeByEmPh" parameterType="String" resultMap="EmployeeResultMap">
+    	select *
+    		from tb_em_info
+    		where em_ph = #{value}
+    </select>
+    
+     <select id="selectfindName" parameterType="String"  resultType="String">
+         select com_admin_name
+         from tb_com_admin_info
+         where com_admin_id = #{comAdminId}
+    </select>
+    
+<!--     <select id="selectfindComId"  parameterType="String"  resultType="String"> -->
+<!--         select com_id -->
+<!--           from tb_com_admin_info -->
+<!--          where com_admin_id =#{comAdminId} -->
+<!--     </select> -->
+    
+    <update id="updatePointsByComId" parameterType="String" >
+       update tb_com_info
+           set  com_points = com_points+1
+       where com_id=#{comId}
+    </update>
+</mapper>

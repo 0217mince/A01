@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ithcima.mapper.AdminMapper">
+	
+		<resultMap type="com.ithcima.domain.Admin" id="AdminResultMap">		
+			<id property="id" column="admin_id"/>
+		</resultMap>
+	
+	    <select id="selectAdmin" parameterType="String" resultMap="AdminResultMap">
+	    select admin_id
+	    from tb_admin_reg
+	    where admin_id=#{id} and
+	    	( is_delete = 0 OR is_delete IS NULL )
+	    </select>
+    
+</mapper>

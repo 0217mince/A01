@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+	<mapper namespace="com.ithcima.mapper.EmployeeMapper">
+	<resultMap type="com.ithcima.domain.EmployeeLogin" id="EmployeeLoginResultMapper">
+		<id property="emId" column="em_id" />
+		<result property="emPw" column="em_pw" />
+		<result property="emJob" column="em_job" />
+		<result property="emDep" column="em_dep"/>
+	</resultMap>
+	
+	<resultMap type="com.ithcima.domain.EmployeePerf" id="EmployeePerfResultMapper">
+		<id property="emId" column="em_id" />
+		<result property="emName" column="em_name" />
+		<result property="comId" column="com_id" />
+		<result property="emDep" column="em_dep" />
+		<result property="emJob" column="em_job" />
+		<result property="achievement" column="achievement" />
+		<result property="workingAbility" column="working_ability" />
+		<result property="workingAttitude" column="working_attitude" />
+		<result property="emText" column="em_text" />
+		<result property="attendance" column="attendance" />
+		<result property="punishment" column="punishment" />
+		<result property="reward" column="reward" />
+		<result property="assessor" column="assessor" />
+		<result property="assessmentDate" column="assessment_date" />
+		<result property="approver" column="approver" />
+		<result property="approvalDate" column="approval_date" />
+		<result property="month" column="month" />
+		<result property="monthlyComScore" column="monthlyComScore" />
+		<result property="year" column="year" />
+	</resultMap>
+	
+	<resultMap type="com.ithcima.domain.SimpleEmployeePerf" id="SimpleEmployeePerfResultMapper">
+		<id property="emId" column="em_id" />
+		<result property="emName" column="em_name" />
+		<result property="emDep" column="em_dep" />
+		<result property="emJob" column="em_job" />
+	</resultMap>
+	
+	
+<resultMap type="com.ithcima.domain.EmployeeEvent" id="EmployeeEventResultMap">
+         <result  property="emId"    column="em_id"/>
+         <result  property="comId"   column="com_id"/>
+         <result  property="comName"   column="com_name"/>
+         <result  property="emName"  column="em_name"/>
+         <result  property="emDep"   column="em_dep"/>
+         <result  property="emJob"   column="em_job"/>
+         <result  property="type" column="type"/>
+         <result  property="content" column="content"/>
+         <result  property="result"   column="result"/>
+         <result  property="notekeeper"   column="notekeeper"/>
+         <result  property="notekeeperOpinion"  column="notekeeper_opinion"/>
+         <result  property="recordDate" column="record_date"/>
+         <result  property="approver"   column="approver"/>
+         <result  property="approverOpinion"      column="approver_opinion"/>
+         <result  property="approvalDate"     column="approval_date"/> 
+         <result  property="finalScore"     column="point"/> 
+     </resultMap>
+     
+     <resultMap type="com.ithcima.domain.EmployeeEvaluation" id="EmployeeEvaluationResultMap">
+         <result  property="emId"    column="em_id"/>
+         <result  property="comId"   column="com_id"/>
+         <result  property="evaluator"  column="evaluator"/>
+         <result  property="evaluatorDep"   column="evaluator_dep"/>
+         <result  property="evaluatorJob"   column="evaluator_job"/>
+         <result  property="emName"  column="em_name"/>
+         <result  property="emDep"   column="em_dep"/>
+         <result  property="emJob"   column="em_job"/>
+         <result  property="date" column="date"/>
+         <result  property="potentialCapability" column="potential_capability"/>
+         <result  property="apparentCapability"   column="apparent_capability"/>
+         <result  property="experientialAbility"   column="experiential_ability"/>
+         <result  property="knowledge"  column="knowledge"/>
+         <result  property="interpersonalRelationship" column="interpersonal_relationship"/>
+         <result  property="comprehensiveEvaluation"   column="comprehensive_evaluation"/>
+     </resultMap>
+     <resultMap type="com.ithcima.domain.Employee" id="EmployeeResultMap">
+         <result  property="emId"    column="em_id"/>
+         <result  property="comId"   column="com_id"/>
+         <result   property="emName"   column="em_name"/>
+         <result   property="emPh"   column="em_ph"/>
+         <result   property="emSex"   column="em_sex"/>
+         <result   property="emEm"   column="em_em"/>
+         <result   property="emDep"   column="em_dep"/>
+         <result   property="emJob"   column="em_job"/>
+         <result   property="emLandline"   column="em_landline"/>
+         <result   property="emExtension"   column="em_extension"/>
+         <result   property="emNum"   column="em_num" />
+         <result   property="emNav"   column="em_nav"  />
+         <result   property="emGradSch"   column="em_grad_sch"/>
+         <result  property="emGradTime"   column="em_grad_time" />
+         <result  property="emDegree"   column="em_degree"/>
+         <result  property="emMaj"   column="em_maj" />
+         <result  property="emNote"   column="em_note"/>
+         <result  property="emPartDep"   column="em_part_dep" />
+         <result  property="emPartJob"   column="em_part_job" />
+     
+     </resultMap>
+      
+      <resultMap type="com.ithcima.domain.Approval" id="ApprovalResultMap">
+           <result  property="applicantName"    column="applicant_name"/>
+           <result  property="applicantId"    column="applicant_id"/>
+           <result  property="applicantDate"    column="applicant_date"/> 
+           <result  property="applicantReason"    column="applicant_reason"/> 
+           <result  property="approverName"    column="approver_name"/>  
+           <result  property="approverId"    column="approver_id"/>  
+           <result  property="approverDate"    column="approver_date"/>  
+           <result  property="approverResult"    column="approver_result"/>  
+           <result  property="type"    column="type"/> 
+           <result  property="applicantComId"    column="applicant_com_id"/> 
+           <result  property="applicantComName"    column="applicant_com_name"/>
+           <result  property="approverComId"    column="approver_com_id"/>  
+           <result  property="approverComName"    column="approver_com_name"/> 
+           <result  property="state"    column="state"/>
+           <result  property="target"    column="target"/>
+           <result  property="targetId"    column="target_id"/>
+      </resultMap>
+	<select id="selectEmployee" parameterType="String" resultMap="EmployeeLoginResultMapper">
+		select em_ph,em_pw,em_job,em_dep
+		from tb_em_info
+		where em_ph = #{emPh}
+	</select>
+	
+	<select id="selectEmployeePerf" parameterType="String" resultMap="EmployeePerfResultMapper">
+		select *
+		from tb_em_performance
+		where com_id=#{comId}  and  assessor is not null  and approver is null
+	</select>
+	
+	<update id="updateEmployeePerf" parameterType="EmployeePerf">
+		update tb_em_performance
+		set	
+		    com_id=#{comId},
+			achievement = #{achievement},
+			working_attitude = #{workingAttitude},
+			working_ability =#{workingAbility},
+			em_text = #{emText},
+			attendance = #{attendance},
+			punishment = #{punishment},
+			reward = #{reward},
+			assessor = #{assessor},
+			assessment_date = #{assessmentDate},
+			month=#{month},
+			monthlyComScore=#{monthlyComScore},
+			year=#{year}		
+		where em_id = #{emId} and assessor is null and assessment_date is null  
+<!-- 		 <if test="(SELECT Month(assessment_date)=1)">and year=#{year-1}</if> -->
+<!-- 		  <if test="(SELECT Month(assessment_date)!=1)">and year=#{year}</if> -->
+	</update>
+	
+	<update id="updateEmployeePerfTwo" parameterType="EmployeePerf" >
+		update tb_em_performance
+		set	
+		    com_id=#{comId},
+			achievement = #{achievement},
+			working_attitude = #{workingAttitude},
+			em_text = #{emText},
+			attendance = #{attendance},
+			punishment = #{punishment},
+			reward = #{reward},
+			approver =#{approver},
+			approval_date=#{approvalDate}		
+		where em_id = #{emId} and assessor is not null
+	</update>
+		
+	<select id="selectAllEmployeePerfs" parameterType="String" resultMap="EmployeePerfResultMapper">
+		select *
+		from tb_em_performance
+		where em_id = #{emId} and  assessor is null  
+	</select>
+   
+    <select  id="selectNoAuditEmployee" parameterType="String" resultMap="EmployeePerfResultMapper">
+       select *
+        from tb_em_performance
+        where   com_id=#{comId}  and  assessor is null  
+    </select>
+    
+    <select id="selectComEmployeeByEmId" parameterType="String" resultMap="EmployeeResultMap">
+     select *
+      from tb_em_info
+      where em_id = #{value}
+    </select>
+    
+     <select id="selectHistory" parameterType="EmployeePerf" resultMap="EmployeePerfResultMapper">
+        select *
+        from tb_em_performance
+        where   (select date_format(assessment_date,'%Y-%m-%d'))=#{assessmentDate} and em_id=#{emId}
+         
+    </select>
+    
+    <select id="selectHistoryEmployee" parameterType="String"  resultMap="EmployeePerfResultMapper">
+       select *
+         from  tb_em_performance
+       where em_id =#{emId} and assessment_date is not null and assessor is not null
+      
+    </select>
+    
+    <select id="selectEmployeePerfFor"  parameterType="String"  resultMap="EmployeePerfResultMapper">
+          select *
+            from  tb_em_performance
+          where em_id=#{emId} and approver is null and assessor is not null
+    </select>
+    
+   <select id="selectAllPassAudit"  parameterType="String"  resultMap="EmployeePerfResultMapper" >
+      select *      
+       from tb_em_performance
+       where em_id=#{emId} and approver is not null and approval_date is not null
+   
+   </select>
+   
+   <select id="selectPassAuditEmployeePerf"  parameterType="EmployeePerf" resultMap="EmployeePerfResultMapper">
+       select * 
+       from tb_em_performance
+       where em_id=#{emId} and approval_date=#{approvalDate}
+   </select>
+   
+   
+	 <select id="selectComEmployeeEvent" parameterType="EmployeeEvent" resultMap="EmployeeEventResultMap">
+    	select *
+    		from tb_em_event
+    		where em_id = #{emId} and com_id=#{comId} order by record_date desc
+    </select>
+    <select id="selectOtherComEvent" parameterType="String" resultMap="EmployeeEventResultMap">
+        select*
+            from tb_em_event
+            where em_id=#{emId} and content like '%离职%'  order by record_date desc
+    </select> 
+
+	<select id="selectComEmployeeEvaluation" resultMap="EmployeeEvaluationResultMap">
+		select *
+			from tb_em_evaluation
+			where com_id = #{comId} and
+				em_id = #{emId}
+				<if test="evaluatorJob==null">and evaluator_job=#{evaluatorJob}</if>
+				<if test="evaluatorJob!=null">and evaluator_dep=#{evaluatorDep}</if>
+	</select>
+	
+	<select id="selectNoAuditEvent"  parameterType="String"  resultMap="EmployeeEventResultMap">
+	     select *
+	     from  tb_em_event
+	     where com_id=#{comId} order by record_date desc 
+	</select>
+	
+	<update id="updateEmployeeEvent"   parameterType="EmployeeEvent" >
+	   update tb_em_event
+	   set  em_dep=#{emDep},
+	       em_job=#{emJob},
+	       approver=#{approver},
+	       approver_opinion=#{approverOpinion},
+	       approval_date=#{approvalDate}
+	    where em_id=#{emId} and approver is null 	       
+	</update>
+	
+	<select id="selectScorePerformance" parameterType="String" resultMap="EmployeePerfResultMapper">
+	    select 
+	    achievement,working_ability,working_attitude,attendance,punishment,reward
+	    from tb_em_performance
+	    where em_id=#{emId}
+	</select>
+	
+	<select id="selectScoreEvaluations" parameterType="String" resultMap="EmployeeEvaluationResultMap" >
+	 select
+	    potential_capability,apparent_capablity,experiential_ability
+	   from  tb_em_evaluation
+	 where em_id=#{emId}
+	
+	</select>
+	
+	<select id="selectEveryYearRecord" parameterType="EmployeePerf" resultMap="EmployeePerfResultMapper">
+	   select *
+	     from tb_em_performance
+	   where em_id=#{emId} and  year =#{approvalDate} order by assessment_date asc 
+	   
+	</select>
+	<update id="insertEmployeePerf" parameterType="EmployeePerf" >
+	  update  tb_em_performance
+	  set monthlyComScore=#{monthlyComScore}
+	      where em_id=#{emId} and (select month(approval_date))=#{approvalDate}
+	</update>
+	
+	<insert id="insertEmployee"  parameterType="Employee">
+	   insert into tb_em_info (em_comprehensive_score)  values (#{finalScore})
+	</insert>
+	
+	<select id="selectMonthScore" parameterType="EmployeePerf" resultMap="EmployeePerfResultMapper" >
+	       select achievement,working_ability,working_attitude,attendance,monthlyComScore
+	           from tb_em_performance
+	         where em_id=#{emId} and (select month(approval_date))=#{approvalDate}
+	</select>
+	
+	<select id="selectByEmPh" parameterType="String" resultMap="EmployeeResultMap" >
+	   select *
+	      from tb_em_info
+	       where em_ph=#{emPh}
+	</select>
+	
+	<insert id="insertApplicant"  parameterType="Approval">
+	   insert into tb_application (target,target_id,applicant_name,applicant_id,applicant_com_id,applicant_com_name,type,state,approver_com_id,approver_com_name,applicant_date) 
+	   values (#{emName},#{emId},#{GmName},#{GmId},#{GmComId},#{GmComName},#{type},#{state},#{comId},#{approverComName},,#{applicantDate})
+	</insert>
+	
+	<select id="selectApplicantCom"  parameterType="String"  resultMap="ApprovalResultMap" >
+	     select *
+	       from tb_application
+	     where applicant_com_id=#{applicantComId} and type like '%背调%'
+	</select>
+     <select id="selectApplicantCom2"  parameterType="Approval"  resultMap="ApprovalResultMap" >
+	     select *
+	       from tb_application
+	     where applicant_com_id=#{applicantComId} and state=#{state}  and type like '%背调%'
+	</select> 
+	<select id="selectApplicantEm"  parameterType="String"  resultMap="ApprovalResultMap">
+	    select *
+	        from tb_application
+	     where applicant_id=#{applicantId} and type like '%申诉%'
+	</select>
+	<select id="selectApplicantEm2"  parameterType="Approval"  resultMap="ApprovalResultMap">
+	    select *
+	        from tb_application
+	     where applicant_id=#{applicantId} and state=#{state} and type like '%申诉%' 
+	</select>
+	<select id="selectBackToAppeal" parameterType="Approval"  resultMap="ApprovalResultMap">
+	    select *
+	      from tb_application
+	    where approver_com_id=#{approverComId} and type =#{type} 
+	</select>
+  <select id="selectBackToAppeal2" parameterType="Approval"  resultMap="ApprovalResultMap">
+	    select *
+	      from tb_application
+	    where approver_com_id=#{approverComId} and type =#{type} and state=#{state}
+	</select>
+	<select id="selectComEmployee" parameterType="Employee" resultMap="EmployeeResultMap">
+     select *
+      from tb_em_info
+      where 1=1
+      <if test="emPh!=null">and em_ph=#{emPh}</if>
+      <if test="emName!=null">and (em_name=#{emName} or em_id=#{emName})</if>
+    </select>
+</mapper>
